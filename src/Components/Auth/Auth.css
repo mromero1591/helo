@@ -1,0 +1,69 @@
+.authSection {
+    background-image: linear-gradient(99deg,#ff70a6,#ff9770 40%,#ffd670 73%,#e9ff70);
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    grid-template-rows: 20% 60% 20%;
+    
+}
+
+.login-section {
+    grid-column: 2 /3;
+    grid-row: 2 / 3;
+    border-radius: 20px;
+    box-shadow: 0 14px 28px 0 rgba(0,0,0,.25), 0 10px 10px 0 rgba(0,0,0,.26);
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: 50% 50%;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+.login-img {
+    grid-row: 1 / 2;
+    grid-column: 1 / 6; 
+    margin-top: 40px;
+}
+
+.login-title {
+    grid-row: 2 / 3;
+    grid-column: 1 / 3;
+    color: white;
+    font-weight: 700;
+    font-size: 5em;
+}
+
+div[class$='group'] {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    color: white;
+    grid-column: 1 / 3;
+    font-weight: 700;
+}
+
+.login-username-group {
+    grid-row:  3 / 4;
+}
+.login-password-group {
+    grid-row:  4 / 5;
+}
+
+.btn-form {
+    grid-row: 5 / 6;
+    background-color: #53514E;
+    color: white;
+    padding: 10px 20px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-login {
+    grid-column: 1 / 2;
+}
+
+.btn-register {
+    grid-column: 2 / 3; 
+}
