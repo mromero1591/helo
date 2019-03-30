@@ -12,4 +12,8 @@ html {
 .App {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
+  display: grid;
+  grid-template-columns: 10% 90%;
+  grid-template-rows: 100vh;
 }
+
