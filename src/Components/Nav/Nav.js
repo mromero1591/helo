@@ -11,9 +11,9 @@ class Nav extends Component {
   render() {
     return (
       <nav className='navbar'>
-        <Link className='btn-link btn-home' to='/dashboard'><img src={homeLogo} /></Link>
-        <Link className='btn-link btn-newpost' to='/form'><img src={newLogo}/></Link>
-        <Link to='/' className='btn-link btn-logout'><img src={shutDownLogo}/></Link>
+        <Link className='btn-link btn-home' to='/dashboard'><img src={homeLogo} alt='home logo'/></Link>
+        <Link className='btn-link btn-newpost' to='/form'><img src={newLogo} alt='new post logo'/></Link>
+        <Link to='/' className='btn-link btn-logout'><img src={shutDownLogo} alt='log out log0'/></Link>
       </nav>
     )
   }

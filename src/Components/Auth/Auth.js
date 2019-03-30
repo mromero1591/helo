@@ -1,11 +1,45 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import Axios from 'axios';
+
+//CUSTOM IMORT
+import {updateUsername, updatePassword,updateCurrentUser, clearLoginInfo} from '../../ducks/reducer';
+//CSS & assest.
 import heloLogo from '../../assest/helo_logo.png';
 
 import './Auth.css';
-
 class Auth extends Component {
 
+    handleRegistration = () => {
+        //get the username and password from state
+        const {username, password} = this.props;
+
+        //call the servers endpoint to register.
+        Axios.post('/auth/register', {username,password})
+        .then(res => {
+            //set the new user in state
+            const {username,profilePic} = res.data;
+            this.props.clearLoginInfo();
+            this.props.updateCurrentUser({username,profilePic});
+            this.props.history.push('/dashboard');
+        })
+    }
+
+    handleLogin = () => {
+        const {username, password} = this.props;
+
+        //call the servers endpoint to login
+        Axios.post('/auth/login', {username, password})
+        .then(res => {
+            const {username, password} = res.data;
+            this.props.clearLoginInfo();
+            this.props.updateCurrentUser({username,profilePic});
+            this.props.history.push('/dashboard');
+        })
+    }
+
     render() {
+        const {username, password, updateUsername,updatePassword} = this.props;
         return (
             <section className='authSection'>
                 <div className='login-section'>
@@ -13,14 +47,14 @@ class Auth extends Component {
                     <div className='login-title'> Helo </div>
                     <div className='login-username-group'>
                         <label>Username:</label>
-                        <input className='login-form-input' />
+                        <input value={username} onChange={e => {updateUsername(e.target.value)}} className='login-form-input' />
                     </div>
                     <div className='login-password-group'>
                         <label>Password:</label>
-                        <input className='login-form-input' />
+                        <input type='password' value={password} onChange={e => {updatePassword(e.target.value)}} className='login-form-input' />
                     </div>
-                    <button className='btn btn-form btn-login'>Login</button>
-                    <button className='btn btn-form btn-register'>Register</button>
+                    <button onClick={this.handleLogin} className='btn btn-form btn-login'>Login</button>
+                    <button onClick={this.handleRegistration} className='btn btn-form btn-register'>Register</button>
 
                 </div>
             </section>
@@ -28,4 +62,13 @@ class Auth extends Component {
     }
 }
 
-export default Auth;
+function mapStateToProps(state) {
+    return {
+        username: state.username,
+        password: state.password
+    }
+}
+
+const mapDispatchToProps = {updateUsername,updatePassword,updateCurrentUser, clearLoginInfo};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
