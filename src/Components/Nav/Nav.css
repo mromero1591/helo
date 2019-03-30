@@ -1,6 +1,34 @@
 .navbar {
     grid-column: 1/2;
     grid-row: 1/2;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 20% 10% 10% 60%;
+    background-image: linear-gradient(0deg,#ff70a6,#ff9770);
+    
+}
+
+/* .nav-bar-top {
     display: flex;
     flex-flow: column;
+    justify-content: flex-end;
+} */
+
+.btn-link>img {
+    max-width: 40px;
+    
+}
+
+.btn-home {
+    grid-row: 2 / 3;
+}
+
+.btn-newpost {
+    grid-row: 3 / 4;
+
+}
+
+.btn-logout {
+    align-self: end;
+    grid-row: 4 / 5;
 }
