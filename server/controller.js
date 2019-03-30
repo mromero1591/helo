@@ -15,10 +15,6 @@ module.exports = {
     },
 
     login: function(req,res,next) {
-        const {username, password} = req.body;
-        const dbInstance = req.app.get('db');
-
-        dbInstance.get_new_user(username)
-        .then(res)
+        res.status(200).send(req.user);
     }
 }
