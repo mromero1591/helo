@@ -4,6 +4,7 @@ import heloLogo from '../../assest/helo_logo.png';
 import './Auth.css';
 
 class Auth extends Component {
+
     render() {
         return (
             <section className='authSection'>
