@@ -1,0 +1,44 @@
+.dashboard {
+    grid-column: 2/3;
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-rows: 10% 90%;
+    background-color: #F2F2F2;
+}
+
+.search {
+    grid-row: 1/2;
+    grid-column: 2/3;
+    background-color: white;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 80% 20%;
+    align-items: center;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.2);
+}
+
+.search-input-section {
+    display: flex;
+    margin-left: 20px;
+}
+
+.search-input {
+    width: 70%;
+    height: 25px;
+}
+
+.search-input-section>img {
+    background-color: #FF9770;
+}
+
+.btn-search {
+    background-color: #5F5E5C;
+    color: white;
+    padding: 5px 5px;
+    border-radius: 3px;
+}
+
+.my-post-section {
+    justify-self: end;
+    margin-right: 20px;
+}

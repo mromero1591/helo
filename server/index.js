@@ -1,5 +1,4 @@
 require('dotenv').config();
-
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -22,7 +21,6 @@ massive(DATABASE_URI)
     console.log("Error in connecting with database:", err);
 });
 
-//PASSPORT - set up auth
 passport.use('login', new LocalStratagy(function(username, password, done) {
     if(!username || !password) {
         return done(null, false, {message: 'email and password are required'});
@@ -55,6 +53,31 @@ passport.use('login', new LocalStratagy(function(username, password, done) {
         console.warn('faced issue when getting user:', err);
         done({message: 'erorr faced when getting user'});
     })
+}))
+
+passport.use('register', new LocalStratagy(function(username, password, done) {
+    const dbInstance = app.get('db');
+
+    dbInstance.users.find({username})
+    .then(function(userResult) {
+        if(userResult.length> 0) {
+            return done(JSON.stringify({ message: 'Username is already in use' }));
+        }
+        
+        const profile_pic = `https://robohash.org/${username}.png`;
+
+        return dbInstance.users.insert({username,password,profile_pic})
+        .then(function(user) {
+            done(null, user);
+        }).catch(function(err) {
+            console.log('error in inserting user:', err);
+            done(JSON.stringify({ message: 'Unknown error occurred.  Please try again.' }));
+        })
+
+    }).catch(function(err) {
+        console.log('error in finding user: ', err);
+        done(JSON.stringify({ message: 'Unknown error occurred.  Please try again.' }));
+    })
 }));
 
 passport.serializeUser(function(user, done) {
@@ -75,9 +98,9 @@ app.use(passport.session());
 
 
 //END POINTS
-app.post('/auth/register', controller.register);
+app.post('/auth/register', passport.authenticate('register'), controller.register);
 app.post('/auth/login', passport.authenticate('login'), controller.login);
-
+app.post('auth/logout', controller.logout);
 
 app.listen(SERVER_PORT, function() {
     console.log(`Listening at port: ${SERVER_PORT}`);

@@ -1,7 +1,9 @@
 const initialState = {
     username: '',
     password: '',
+    searchInput: '',
     currentUser: {
+        id: -1,
         username: '',
         profilePic: ''
     }
@@ -11,7 +13,8 @@ const UPDATE_USERNAME = 'UPDATE_USERNAME';
 const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
 const UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
 const CLEAR_LOGING_INFO = 'CLEAR_LOGING_INFO';
-
+const CLEAR_USER_INFO = 'CLEAR_USER_INFO';
+const UPDATE_SEARCH_INPUT = 'UPDATE_SEARCH_INPUT';
 
 function reducer(state = initialState, action) {
     switch (action.type) {
@@ -20,9 +23,23 @@ function reducer(state = initialState, action) {
         case UPDATE_PASSWORD:
             return Object.assign({}, state, {password: action.payLoad});
         case UPDATE_CURRENT_USER:
-            return Object.assign({}, state, {currentUser: {username: action.payLoad.username, profilePic: action.payLoad.profilePic}});
+            return {
+                ...state,
+                currentUser: {
+                    id: action.payLoad.id,
+                    profilePic: action.payLoad.profilePic,
+                    username: action.payLoad.username
+                }
+            }
+        case UPDATE_SEARCH_INPUT:
+            return {
+                ...state,
+                searchInput: action.payLoad
+            }
         case CLEAR_LOGING_INFO:
             return Object.assign({}, state, {username: '', password:''})
+        case CLEAR_USER_INFO:
+            return Object.assign({}, state, {currentUser: {id: -1, username: '', profilePic: ''}})
         default:
             return state;
     }
@@ -43,12 +60,20 @@ export function updatePassword(password) {
     }
 }
 
+export function updateSearchInput(searchInput) {
+    return {
+        type: UPDATE_SEARCH_INPUT,
+        payLoad: searchInput
+    }
+}
+
 export function updateCurrentUser(user) {
     return {
         type: UPDATE_CURRENT_USER,
         payLoad: {
+            id: user.id,
             username: user.username,
-            profilePic: user.profilePic
+            profilePic: user.profile_pic
         }
     }
 }
@@ -58,4 +83,11 @@ export function clearLoginInfo() {
         type: CLEAR_LOGING_INFO,
     }
 }
+
+export function clearUserInfo() {
+    return {
+        type: CLEAR_USER_INFO
+    }
+}
+
 export default reducer;

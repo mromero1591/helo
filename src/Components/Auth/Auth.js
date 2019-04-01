@@ -18,9 +18,10 @@ class Auth extends Component {
         Axios.post('/auth/register', {username,password})
         .then(res => {
             //set the new user in state
-            const {username,profilePic} = res.data;
+            const {username,profile_pic} = res.data;
+
             this.props.clearLoginInfo();
-            this.props.updateCurrentUser({username,profilePic});
+            this.props.updateCurrentUser({username,profile_pic});
             this.props.history.push('/dashboard');
         })
     }
@@ -31,9 +32,10 @@ class Auth extends Component {
         //call the servers endpoint to login
         Axios.post('/auth/login', {username, password})
         .then(res => {
-            const {username, profilePic} = res.data;            
+            const {username, profile_pic} = res.data;    
+            console.log(res.data);        
             this.props.clearLoginInfo();
-            this.props.updateCurrentUser({username,profilePic});
+            this.props.updateCurrentUser({username,profile_pic});
             this.props.history.push('/dashboard');
         }).catch(err => {
             if(err.response.status === 401) {
@@ -69,6 +71,7 @@ class Auth extends Component {
 
 function mapStateToProps(state) {
     return {
+        id: state.id,
         username: state.username,
         password: state.password
     }
