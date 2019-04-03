@@ -1,13 +1,30 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
+import Axios from 'axios';
 
 //custom imports
 import './Dashboard.css';
 import searchLogo from '../../assest/search_logo.png';
-import {updateSearchInput} from '../../ducks/reducer';
+import {updateSearchInput, updateMyPost, updatePost} from '../../ducks/postReducer';
+import Post from '../Post/Post';
 
 class Dashboard extends Component {
+  componentDidMount() {
+    Axios.get('/api/post')
+    .then(res => {
+      console.log(res.data);
+      this.props.updatePost(res.data);
+    }).catch(err => {
+      console.log('error in getting post:', err);
+    });
+  }
+
   render() {
+    const posts = this.props.posts.map( function(post) {
+        return (
+          <Post key={post.id} post={post} />
+        );
+    });
     return (
       <section className='dashboard'>
         <section className='search'>
@@ -18,8 +35,11 @@ class Dashboard extends Component {
             </div>
             <div className="my-post-section">
               <label>My Post</label>
-              <input type="checkbox" name="my-post"/>
+              <input checked={this.props.myPost} type="checkbox" name="my-post" onChange={(e) => {this.props.updateMyPost( this.props.myPost ? false : true )}}/>
             </div>
+        </section>
+        <section className='all-post-section'>
+          {posts}
         </section>
       </section>
     )
@@ -28,10 +48,12 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-    searchInput: state.searchInput
+    searchInput: state.post.searchInput,
+    myPost: state.post.myPost,
+    posts: state.post.posts
   }
 }
 
-const mapDispatchToProps = {updateSearchInput};
+const mapDispatchToProps = {updateSearchInput,updateMyPost,updatePost};
 
 export default connect(mapStateToProps,mapDispatchToProps)(Dashboard);

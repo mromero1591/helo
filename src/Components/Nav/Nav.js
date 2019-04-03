@@ -8,7 +8,7 @@ import './Nav.css';
 import homeLogo from '../../assest/home_logo.png';
 import newLogo from '../../assest/new_logo.png';
 import shutDownLogo from '../../assest/shut_down.png';
-import {clearUserInfo} from '../../ducks/reducer';
+import {clearUserInfo} from '../../ducks/userReducer';
 
 class Nav extends Component {
   
@@ -39,7 +39,7 @@ class Nav extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.currentUser
+    user: state.user.currentUser
   }
 }
 

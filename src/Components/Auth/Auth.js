@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import Axios from 'axios';
 
 //CUSTOM IMORT
-import {updateUsername, updatePassword,updateCurrentUser, clearLoginInfo} from '../../ducks/reducer';
+import {updateUsername, updatePassword, updateCurrentUser, clearLoginInfo} from '../../ducks/userReducer';
 //CSS & assest.
 import heloLogo from '../../assest/helo_logo.png';
 
@@ -29,7 +29,7 @@ class Auth extends Component {
     handleLogin = () => {
         const {username, password} = this.props;
 
-        //call the servers endpoint to login
+        //call the servers endpoint to login.
         Axios.post('/auth/login', {username, password})
         .then(res => {
             const {username, profile_pic} = res.data;    
@@ -72,8 +72,8 @@ class Auth extends Component {
 function mapStateToProps(state) {
     return {
         id: state.id,
-        username: state.username,
-        password: state.password
+        username: state.user.username,
+        password: state.user.password
     }
 }
 

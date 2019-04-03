@@ -1,7 +1,6 @@
 const initialState = {
     username: '',
     password: '',
-    searchInput: '',
     currentUser: {
         id: -1,
         username: '',
@@ -14,9 +13,8 @@ const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
 const UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
 const CLEAR_LOGING_INFO = 'CLEAR_LOGING_INFO';
 const CLEAR_USER_INFO = 'CLEAR_USER_INFO';
-const UPDATE_SEARCH_INPUT = 'UPDATE_SEARCH_INPUT';
 
-function reducer(state = initialState, action) {
+function userReducer(state = initialState, action) {
     switch (action.type) {
         case UPDATE_USERNAME:
             return Object.assign({}, state, {username: action.payLoad});
@@ -30,11 +28,6 @@ function reducer(state = initialState, action) {
                     profilePic: action.payLoad.profilePic,
                     username: action.payLoad.username
                 }
-            }
-        case UPDATE_SEARCH_INPUT:
-            return {
-                ...state,
-                searchInput: action.payLoad
             }
         case CLEAR_LOGING_INFO:
             return Object.assign({}, state, {username: '', password:''})
@@ -57,13 +50,6 @@ export function updatePassword(password) {
     return {
         type: UPDATE_PASSWORD,
         payLoad: password
-    }
-}
-
-export function updateSearchInput(searchInput) {
-    return {
-        type: UPDATE_SEARCH_INPUT,
-        payLoad: searchInput
     }
 }
 
@@ -90,4 +76,4 @@ export function clearUserInfo() {
     }
 }
 
-export default reducer;
+export default userReducer;

@@ -98,9 +98,10 @@ app.use(passport.session());
 
 
 //END POINTS
+app.get('/api/post', controller.getPost);
 app.post('/auth/register', passport.authenticate('register'), controller.register);
 app.post('/auth/login', passport.authenticate('login'), controller.login);
-app.post('auth/logout', controller.logout);
+app.post('/auth/logout', controller.logout);
 
 app.listen(SERVER_PORT, function() {
     console.log(`Listening at port: ${SERVER_PORT}`);
