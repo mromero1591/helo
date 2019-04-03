@@ -9,16 +9,25 @@ import homeLogo from '../../assest/home_logo.png';
 import newLogo from '../../assest/new_logo.png';
 import shutDownLogo from '../../assest/shut_down.png';
 import {clearUserInfo, updateCurrentUser} from '../../ducks/userReducer';
+import {getCookieValue, deleteCookie} from '../../cokkies';
 
 class Nav extends Component {
   constructor(props) {
     super(props);
   }
 
-  handleLogout = () => { 
-    this.props.clearUserInfo();
-    console.log(this.props);
+  componentDidMount() {
+    const id = getCookieValue("userid");
+    const username = getCookieValue("username");
+    const profile_pic = getCookieValue("profile_pic");
+    this.props.updateCurrentUser({id,username,profile_pic});
+  }
 
+  handleLogout = () => { 
+    deleteCookie('userid');
+    deleteCookie('username');
+    deleteCookie('profile_pic');
+    this.props.clearUserInfo();
   }
 
   render() {

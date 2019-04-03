@@ -6,18 +6,19 @@ import Axios from 'axios';
 import './Dashboard.css';
 import searchLogo from '../../assest/search_logo.png';
 import {updateSearchInput, updateMyPost, updatePost} from '../../ducks/postReducer';
+import {getCookieValue} from '../../cokkies';
 import Post from '../Post/Post';
 
 class Dashboard extends Component {
   componentDidMount() {
-    Axios.get(`/api/post/${this.props.user.id}`,
+    const id = getCookieValue("userid");
+    Axios.get(`/api/post/${id}`,
     {
       params: {
         userpost: this.props.myPost
       }
     })
     .then(res => {
-      console.log(res.data);
       this.props.updatePost(res.data);
     }).catch(err => {
       console.log('error in getting post:', err);

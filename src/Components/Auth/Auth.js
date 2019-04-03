@@ -4,11 +4,20 @@ import Axios from 'axios';
 
 //CUSTOM IMORT
 import {updateUsername, updatePassword, updateCurrentUser, clearLoginInfo} from '../../ducks/userReducer';
+import {getCookieValue} from '../../cokkies';
 //CSS & assest.
 import heloLogo from '../../assest/helo_logo.png';
 
 import './Auth.css';
 class Auth extends Component {
+
+    componentDidMount() {
+        //if a user is logged in then redirect to the dashboard.
+        const id = getCookieValue("userid");
+        if(id) {
+            this.props.history.push('/dashboard');
+        }
+    }
 
     handleRegistration = () => {
         //get the username and password from state
@@ -18,10 +27,18 @@ class Auth extends Component {
         Axios.post('/auth/register', {username,password})
         .then(res => {
             //set the new user in state
-            const {username,profile_pic} = res.data;
+            const {id,username,profile_pic} = res.data;
 
+            //clear the login info and set it on cookies, to persist
             this.props.clearLoginInfo();
-            this.props.updateCurrentUser({username,profile_pic});
+            document.cookie = `userid=${id}`; 
+            document.cookie = `username=${username}`; 
+            document.cookie = `profile_pic=${profile_pic}`;
+            
+            //update redux to keep track of the current user.
+            this.props.updateCurrentUser({id,username,profile_pic});
+
+            //push to dashbord.
             this.props.history.push('/dashboard');
         })
     }
@@ -32,10 +49,20 @@ class Auth extends Component {
         //call the servers endpoint to login.
         Axios.post('/auth/login', {username, password})
         .then(res => {
-            const {id, username, profile_pic} = res.data;    
-            console.log(res.data);        
+
+            //get the id username and profile picture from the axios call.
+            const {id, username, profile_pic} = res.data;
+
+            //clear the login info and set it on cookies, to persist
             this.props.clearLoginInfo();
+            document.cookie = `userid=${id}`; 
+            document.cookie = `username=${username}`; 
+            document.cookie = `profile_pic=${profile_pic}`;
+
+            //update redux to keep track of the current user.
             this.props.updateCurrentUser({id,username,profile_pic});
+
+            //push to dashbord.
             this.props.history.push('/dashboard');
         }).catch(err => {
             if(err.response.status === 401) {
