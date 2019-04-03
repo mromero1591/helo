@@ -10,7 +10,12 @@ import Post from '../Post/Post';
 
 class Dashboard extends Component {
   componentDidMount() {
-    Axios.get('/api/post')
+    Axios.get(`/api/post/${this.props.user.id}`,
+    {
+      params: {
+        userpost: this.props.myPost
+      }
+    })
     .then(res => {
       console.log(res.data);
       this.props.updatePost(res.data);
@@ -50,7 +55,8 @@ function mapStateToProps(state) {
   return {
     searchInput: state.post.searchInput,
     myPost: state.post.myPost,
-    posts: state.post.posts
+    posts: state.post.posts,
+    user: state.user.currentUser
   }
 }
 

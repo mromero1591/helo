@@ -12,6 +12,7 @@ function postReducer(state = initialState, action) {
     switch (action.type) {
         case UPDATE_POSTS:
             return {
+                ...state,
                 posts: [...action.payLoad]
         }
         case UPDATE_SEARCH_INPUT:

@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'; 
 import {connect} from 'react-redux';
-
+import Axios from 'axios';
 
 //Custom imports
 import './Nav.css';
 import homeLogo from '../../assest/home_logo.png';
 import newLogo from '../../assest/new_logo.png';
 import shutDownLogo from '../../assest/shut_down.png';
-import {clearUserInfo} from '../../ducks/userReducer';
+import {clearUserInfo, updateCurrentUser} from '../../ducks/userReducer';
 
 class Nav extends Component {
-  
+  constructor(props) {
+    super(props);
+  }
+
   handleLogout = () => { 
     this.props.clearUserInfo();
     console.log(this.props);
@@ -43,6 +46,6 @@ function mapStateToProps(state) {
   }
 }
 
-const mapDispatchToProps = {clearUserInfo};
+const mapDispatchToProps = {clearUserInfo, updateCurrentUser};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);

@@ -7,4 +7,6 @@ SELECT
     u.profile_pic
 FROM
     posts AS p
-    JOIN users AS u ON (p.author_id = u.id);
+    JOIN users AS u ON (p.author_id = u.id)
+WHERE
+    author_id != $1;

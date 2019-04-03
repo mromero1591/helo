@@ -2,12 +2,24 @@ module.exports = {
     getPost: function(req,res,next) {
         const dbInstance = req.app.get('db');
 
-        dbInstance.get_all_post()
-        .then(posts => {
-            res.status(200).send(posts);
-        }).catch(err => {
-            res.sendStatus(500);
-        })
+        const USER_ID = req.params.id;
+        const USERPOST = req.query.userpost;
+
+        if(USERPOST) {
+            dbInstance.get_user_post([USER_ID])
+            .then( posts => {
+                res.status(200).send(posts);
+            }).catch(err => {
+                res.sendStatus(500);
+            })
+        } else {
+            dbInstance.get_non_user_post([USER_ID])
+            .then( posts => {
+                res.status(200).send(posts);
+            }).catch(err => {
+                res.sendStatus(500);
+            })
+        }
     },
 
     register: function(req,res,next) {

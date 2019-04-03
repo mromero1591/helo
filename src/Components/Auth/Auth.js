@@ -32,10 +32,10 @@ class Auth extends Component {
         //call the servers endpoint to login.
         Axios.post('/auth/login', {username, password})
         .then(res => {
-            const {username, profile_pic} = res.data;    
+            const {id, username, profile_pic} = res.data;    
             console.log(res.data);        
             this.props.clearLoginInfo();
-            this.props.updateCurrentUser({username,profile_pic});
+            this.props.updateCurrentUser({id,username,profile_pic});
             this.props.history.push('/dashboard');
         }).catch(err => {
             if(err.response.status === 401) {
