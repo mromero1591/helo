@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'; 
 import {connect} from 'react-redux';
-import Axios from 'axios';
 
 //Custom imports
 import './Nav.css';
@@ -12,10 +11,6 @@ import {clearUserInfo, updateCurrentUser} from '../../ducks/userReducer';
 import {getCookieValue, deleteCookie} from '../../cokkies';
 
 class Nav extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const id = getCookieValue("userid");
     const username = getCookieValue("username");
@@ -33,7 +28,7 @@ class Nav extends Component {
   render() {
     return (
       <nav className='navbar'>
-        <img className='profile-pic' src={this.props.user.profilePic} />
+        <img className='profile-pic' alt='profile pic' src={this.props.user.profilePic} />
         <div className='profile-name'>{this.props.user.username}</div>
         <Link to='/dashboard' className='btn-link btn-home'>
           <img src={homeLogo} alt='home logo'/>
