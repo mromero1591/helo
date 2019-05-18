@@ -1,11 +1,19 @@
 module.exports = {
-    getPost: function(req,res,next) {
+    getUser: function(req,res,next) {
+        if(req.session && req.session.user) {
+            var user_id = req.session.user.id;
+            var dbInstance = req.app.get('db');
+            var id = parseInt(req.params.id); 
+            var dbInstance = req.app.get('db')
+        }
+    },
+    getAllPost: function(req,res,next) {
         const dbInstance = req.app.get('db');
 
         const USER_ID = req.params.id;
         const USERPOST = req.query.userpost;
 
-        if(USERPOST != 'false') {
+        if(USERPOST !== 'false') {
             dbInstance.get_user_post([USER_ID])
             .then( posts => {
                 res.status(200).send(posts);
@@ -22,23 +30,18 @@ module.exports = {
         }
     },
 
-    register: function(req,res,next) {
-        delete req.user.password;
-        req.session.userid = req.user.id;
-        res.status(200).send(req.user);
-    },
+    getPost: function(req,res,next) {
+        const dbInstance = req.app.get('db');
+        const postId = parseInt(req.params.id);
 
-    login: function(req,res,next) {
-        delete req.user.password;
-        req.session.userid = req.user.id;
-        res.status(200).send(req.user);
-    },
+        dbInstance.get_post([postId])
+        .then(post => {
+            res.status(200).send(post);
+        }).catch(err => {
+            res.status(500).send({message: 'error in getting post'});
+        })
 
-    logout: function(req,res,next) {
-        req.session.destroy;
-        res.sendStatus(200);
     },
-
     searchPost: function(req,res,next) {
         //get the database from the app.
         const dbInstance = req.app.get('db');
@@ -50,7 +53,7 @@ module.exports = {
         const sqlSearchString = `%${searchString}%`;
 
         //If user is selected use post_title_contains
-        if(userpost != 'false') {
+        if(userpost !== 'false') {
             const userId = req.session.userid;
             dbInstance.post_title_contains([sqlSearchString, userId])
             .then(posts => {

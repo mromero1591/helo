@@ -1,8 +1,5 @@
-SELECT
-    id,
-    username,
-    profile_pic,
-FROM
-    users
-WHERE
-    id = $1
+SELECT id,
+       username,
+       password
+FROM users
+WHERE username = $1

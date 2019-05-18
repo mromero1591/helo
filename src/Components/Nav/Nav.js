@@ -2,42 +2,32 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom'; 
 import {connect} from 'react-redux';
 
+
 //Custom imports
 import './Nav.css';
 import homeLogo from '../../assest/home_logo.png';
 import newLogo from '../../assest/new_logo.png';
 import shutDownLogo from '../../assest/shut_down.png';
-import {clearUserInfo, updateCurrentUser} from '../../ducks/userReducer';
-import {getCookieValue, deleteCookie} from '../../cokkies';
+import Axios from 'axios';
 
 class Nav extends Component {
-  componentDidMount() {
-    const id = getCookieValue("userid");
-    const username = getCookieValue("username");
-    const profile_pic = getCookieValue("profile_pic");
-    this.props.updateCurrentUser({id,username,profile_pic});
-  }
 
-  handleLogout = () => { 
-    deleteCookie('userid');
-    deleteCookie('username');
-    deleteCookie('profile_pic');
-    this.props.clearUserInfo();
+  logout = () => {
+    Axios.get('/auth/logout');
   }
-
   render() {
     return (
       <nav className='navbar'>
-        <img className='profile-pic' alt='profile pic' src={this.props.user.profilePic} />
-        <div className='profile-name'>{this.props.user.username}</div>
+        <img className='profile-pic' alt='profile pic' src={this.props.profilePic} />
+        <div className='profile-name'>{this.props.username}</div>
         <Link to='/dashboard' className='btn-link btn-home'>
           <img src={homeLogo} alt='home logo'/>
         </Link>
         <Link to='form' className='btn-link btn-newpost'>
           <img src={newLogo} alt='new post logo'/>
         </Link>
-        <Link to='/' className='btn-link btn-logout'>
-          <img  src={shutDownLogo} alt='log out log0' onClick={this.handleLogout}/>
+        <Link onClick={this.logout} to='/' className='btn-link btn-logout'>
+          <img  src={shutDownLogo} alt='log out log0'/>
         </Link>
       </nav>
     )
@@ -46,10 +36,9 @@ class Nav extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.user.currentUser
+    username: state.user.username,
+    profilePic: state.user.profilePic,
+    id: state.user.id
   }
 }
-
-const mapDispatchToProps = {clearUserInfo, updateCurrentUser};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+export default connect(mapStateToProps)(Nav);

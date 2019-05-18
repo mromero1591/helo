@@ -11,7 +11,7 @@ export default (
     <Switch>
         <Route exact path='/' component={Auth} />
         <Route path='/dashboard' component={Dashboard} /> 
-        <Route path='/post/:id' component={Post} />
+        <Route path='/post/:postid' component={Post} />
         <Route path='/new' component={Form} />
     </Switch>
 )
