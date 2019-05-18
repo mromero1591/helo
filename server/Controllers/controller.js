@@ -2,9 +2,11 @@ module.exports = {
     getUser: function(req,res,next) {
         if(req.session && req.session.user) {
             var user_id = req.session.user.id;
-            var dbInstance = req.app.get('db');
-            var id = parseInt(req.params.id); 
-            var dbInstance = req.app.get('db')
+            var dbInstance = req.app.get('db'); 
+            
+            dbInstance.get_user(user_id).then(user => {
+                res.status(200).send(user[0]);
+            })
         }
     },
 

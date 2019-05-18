@@ -125,6 +125,7 @@ app.get('/auth/logout', authController.logout);
 
 
 //END POINTS
+app.get('/api/user', controller.getUser);
 app.get('/api/post', controller.getPosts);
 app.get('/api/post/:id', controller.getPost);
 app.get('/api/search', controller.searchPost);

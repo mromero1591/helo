@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom'; 
 import {connect} from 'react-redux';
 
-
+import {updateUser} from '../../ducks/userReducer';
 //Custom imports
 import './Nav.css';
 import homeLogo from '../../assest/home_logo.png';
@@ -15,6 +15,21 @@ class Nav extends Component {
   logout = () => {
     Axios.get('/auth/logout');
   }
+
+  componentDidMount() {
+    Axios.get('/api/user').then(res => {
+      console.log(res.data);
+      var {id, username, profile_pic} = res.data;
+      this.props.updateUser({
+        id: id,
+        username: username,
+        profilePic: profile_pic
+      })
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
   render() {
     return (
       <nav className='navbar'>
@@ -41,4 +56,6 @@ function mapStateToProps(state) {
     id: state.user.id
   }
 }
-export default connect(mapStateToProps)(Nav);
+const mapDispatchToProps = {updateUser};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);
