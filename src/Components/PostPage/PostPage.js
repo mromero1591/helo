@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Axios from 'axios';
 
+import noImg from '../../assest/no_image.jpg';
+
 export default class PostPage extends Component {
 
     constructor(props) {
@@ -21,9 +23,9 @@ export default class PostPage extends Component {
     }
     render() {
         return (
-        <section className="post-page">
+        <section className="page">
             <div className='container post-wrapper'>
-                <div className="post-page-header">
+                <div className="page-header">
                     <h2>{this.state.post.title}</h2>
                     <div className="post-user-wrapper">
                     <div className="post-user-name">
@@ -37,7 +39,7 @@ export default class PostPage extends Component {
 
                 <div className="post-page-content">
                     <div className="post-page-img-container">
-                        <img src={this.state.post.img} alt="post content"/>
+                        <img src={this.state.post.img !== '' ? this.state.post.img : noImg } alt="post content"/>
                     </div>
                     <div className="post-page-content">
                         {this.state.post.content}

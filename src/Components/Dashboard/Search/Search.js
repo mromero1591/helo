@@ -25,7 +25,7 @@ function Search(props) {
         <div className="search-section">
           <input value={searchInput} onChange={(e) => {setSearchInput(e.target.value)}} type="text" name="search" placeholder='Search by title'/>
           <img onClick={search}  className='search-button' src={searchLogo} alt="search icon"/>
-          <button onClick={() => {resetSearch()}} className='reset-btn'>Reset</button>
+          <button onClick={() => {resetSearch()}} className='btn'>Reset</button>
         </div>
 
         <div className="my-post-wrapper">

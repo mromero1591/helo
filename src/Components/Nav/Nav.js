@@ -38,7 +38,7 @@ class Nav extends Component {
         <Link to='/dashboard' className='btn-link btn-home'>
           <img src={homeLogo} alt='home logo'/>
         </Link>
-        <Link to='form' className='btn-link btn-newpost'>
+        <Link to='/new' className='btn-link btn-newpost'>
           <img src={newLogo} alt='new post logo'/>
         </Link>
         <Link onClick={this.logout} to='/' className='btn-link btn-logout'>

@@ -128,7 +128,7 @@ app.get('/auth/logout', authController.logout);
 app.get('/api/user', controller.getUser);
 app.get('/api/post', controller.getPosts);
 app.get('/api/post/:id', controller.getPost);
-app.get('/api/search', controller.searchPost);
+app.post('/api/create', controller.createPost);
 
 app.listen(SERVER_PORT, function() {
     console.log(`Listening at port: ${SERVER_PORT}`);

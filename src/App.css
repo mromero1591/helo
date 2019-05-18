@@ -209,7 +209,7 @@ div[class$='group'] {
   cursor: pointer;
 }
 
-.reset-btn {
+.btn {
   background-color: #53514E;
   color: white;
 }
@@ -257,7 +257,7 @@ div[class$='group'] {
   height: 50px;
 }
 
-.post-page {
+.page {
   grid-column: 2/3;
   display: flex;
   flex-flow: column nowrap;
@@ -269,7 +269,7 @@ div[class$='group'] {
   width: 80%;
 }
 
-.post-page-header {
+.page-header {
   display: flex;
   justify-content: space-between;
   padding: 20px;
@@ -283,14 +283,55 @@ div[class$='group'] {
 }
 
 .post-page-img-container {
+  height: 500px;
+  width: 500px;
   overflow: hidden;
-  object-fit: fill;
-  height: 300px;
-  flex-grow: 1;
-  flex-basis: 50%;
+
 }
 
 .post-page-img-container>img{
   width: 100%;
-  position: relative;
+  height: auto;
+
+}
+
+.form-container {
+  width: 80%;
+}
+
+.form-page-title {
+  color: #FF9770;
+  font-size: 1.2em;
+}
+
+.form {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.form>label {
+  width: 80%;
+  display: flex;
+  flex-flow: column;
+  margin-bottom: 10px;
+
+}
+
+.img-container {
+  height: 500px;
+  width: 500px;
+  overflow: hidden;
+  border: #53514E 1px solid;
+}
+
+.img-container>img {
+  width: 100%;
+  height: auto;
+}
+
+.form>button {
+  align-self: flex-end;
+  margin-right: 30px;
+  padding: 5px 10px;
 }
