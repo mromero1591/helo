@@ -1,7 +1,7 @@
 const initialState = {
     posts: [],
     searchInput: '',
-    myPost: true,
+    myPost: false,
 }
 
 const UPDATE_POSTS = 'UPDATE_POSTS';
@@ -29,7 +29,8 @@ function postReducer(state = initialState, action) {
         case CLEAR_SEARCH:
             return {
                 ...state,
-                searchInput: ''
+                searchInput: '',
+                myPost: false
             }
         default:
             return state

@@ -98,9 +98,12 @@ div[class$='group'] {
 /* DASHBOARD ================================================================================================ */
 .dashboard {
   grid-column: 2/3;
-  display: grid;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  /* display: grid;
   grid-template-columns: 20% 60% 20%;
-  grid-template-rows: 10% 90%;
+  grid-template-rows: 10% 90%; */
   background-color: #F2F2F2;
 }
 
@@ -170,4 +173,84 @@ div[class$='group'] {
   max-width: 50px;
   border-radius: 50%;
   background-color: white;
+}
+
+/* DASHBOARD - SEARCH  ================================================================================================*/
+.container {
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.2);
+}
+
+.search-wrapper {
+  margin-top: 40px;
+  width: 70%;
+  height: 55px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.search-section {
+  display: flex;
+  width: 70%;
+}
+
+.search-section>input {
+  width: 80%;
+  height: 25px;
+}
+
+.search-button {
+  padding: 1px;
+  background-color: #ff9770;
+}
+
+.search-button:hover {
+  cursor: pointer;
+}
+
+.reset-btn {
+  background-color: #53514E;
+  color: white;
+}
+
+/* DASHBOARD - POST SECTION  ================================================================================================ */
+.post-container {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 70%;
+}
+
+.post-card {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 5px 7px 10px rgba(0,0,0,.4);
+  margin-bottom: 20px;
+}
+
+.post-card:hover {
+  cursor: pointer;
+}
+
+.post-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.post-user-wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+
+.profile-card-img-container {
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,.4);
+}
+.post-user-img {
+  width: 50px;
+  height: 50px;
 }

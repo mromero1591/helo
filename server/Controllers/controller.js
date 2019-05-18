@@ -7,6 +7,17 @@ module.exports = {
             var dbInstance = req.app.get('db')
         }
     },
+
+    getPosts: function(req,res,next) {
+        const db = req.app.get('db');
+
+        db.get_posts().then(posts => {
+            res.status(200).send(posts);
+        }).catch(err => {
+            res.status(500).send({message: 'error in getting pots', error: err});
+        });
+    },
+
     getAllPost: function(req,res,next) {
         const dbInstance = req.app.get('db');
 
