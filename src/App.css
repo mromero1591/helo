@@ -222,6 +222,8 @@ div[class$='group'] {
 }
 
 .post-card {
+  text-decoration: none;
+  color: black;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -253,4 +255,42 @@ div[class$='group'] {
 .post-user-img {
   width: 50px;
   height: 50px;
+}
+
+.post-page {
+  grid-column: 2/3;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  background-color: #F2F2F2;
+}
+
+.post-wrapper {
+  width: 80%;
+}
+
+.post-page-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.post-page-content {
+  display: flex;
+  justify-content: space-between;
+  flex-basis: 50%;
+  padding: 40px;
+}
+
+.post-page-img-container {
+  overflow: hidden;
+  object-fit: fill;
+  height: 300px;
+  flex-grow: 1;
+  flex-basis: 50%;
+}
+
+.post-page-img-container>img{
+  width: 100%;
+  position: relative;
 }

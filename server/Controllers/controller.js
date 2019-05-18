@@ -18,41 +18,17 @@ module.exports = {
         });
     },
 
-    getAllPost: function(req,res,next) {
-        const dbInstance = req.app.get('db');
-
-        const USER_ID = req.params.id;
-        const USERPOST = req.query.userpost;
-
-        if(USERPOST !== 'false') {
-            dbInstance.get_user_post([USER_ID])
-            .then( posts => {
-                res.status(200).send(posts);
-            }).catch(err => {
-                res.sendStatus(500);
-            })
-        } else {
-            dbInstance.get_non_user_post([USER_ID])
-            .then( posts => {
-                res.status(200).send(posts);
-            }).catch(err => {
-                res.sendStatus(500);
-            })
-        }
-    },
-
     getPost: function(req,res,next) {
         const dbInstance = req.app.get('db');
         const postId = parseInt(req.params.id);
-
         dbInstance.get_post([postId])
-        .then(post => {
-            res.status(200).send(post);
+        .then( post => {
+            res.status(200).send(post[0]);
         }).catch(err => {
             res.status(500).send({message: 'error in getting post'});
         })
-
     },
+
     searchPost: function(req,res,next) {
         //get the database from the app.
         const dbInstance = req.app.get('db');

@@ -127,7 +127,6 @@ app.get('/auth/logout', authController.logout);
 //END POINTS
 app.get('/api/post', controller.getPosts);
 app.get('/api/post/:id', controller.getPost);
-app.get('/api/posts/:id', controller.getAllPost);
 app.get('/api/search', controller.searchPost);
 
 app.listen(SERVER_PORT, function() {

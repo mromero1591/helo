@@ -1,8 +1,9 @@
 import React from 'react'
+import {Link} from 'react-router-dom';
 
 function Post(props) {
     return (
-      <section className='post-card'>
+      <Link className='post-card' to={`/post/${props.post.id}`}>
         <div className="post-title">
           {props.post.title}
         </div>
@@ -14,7 +15,7 @@ function Post(props) {
             <img src={props.post.profile_pic} alt="profile" className="post-user-img"/>
           </div>
         </div>
-      </section>
+      </Link>
     )
 }
 
